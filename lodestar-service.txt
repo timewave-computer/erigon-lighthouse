@@ -1,13 +1,14 @@
+chef@ark:~$ sudo cat /etc/systemd/system/lodestar.service
 [Unit]
-Description=Lodestar Ethereum Beacon Node
+Description=Lodestar Ethereum Beacon Node (Sepolia)
 After=network.target
 
 [Service]
 User=chef
 Group=chef
 WorkingDirectory=/home/chef/Ethereum/lodestar
-ExecStart=/usr/bin/node ./packages/cli/bin/lodestar.js beacon \
-  --network=mainnet \
+ExecStart=/usr/bin/node --max-old-space-size=8192 ./packages/cli/bin/lodestar.js beacon \
+  --network=sepolia \
   --dataDir=/home/chef/Ethereum/data/lodestar \
   --execution.urls=http://localhost:8551 \
   --jwtSecret=/home/chef/Ethereum/jwt.hex \
@@ -15,7 +16,8 @@ ExecStart=/usr/bin/node ./packages/cli/bin/lodestar.js beacon \
   --rest.address=0.0.0.0 \
   --rest.port=5052 \
   --metrics \
-  --metrics.port=8008
+  --metrics.port=8008 \
+  --checkpointSyncUrl=https://beaconstate-sepolia.chainsafe.io
 Restart=always
 RestartSec=5
 Environment=NODE_ENV=production
