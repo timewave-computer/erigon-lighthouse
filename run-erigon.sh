@@ -8,11 +8,12 @@
   --http \
   --http.addr=0.0.0.0 \
   --http.port=8550 \
-  --http.api=eth,web3,net,debug,trace,engine,erigon,txpool \
+  --http.api=eth,web3,net,debug,trace,engine,erigon \
   --authrpc.addr=0.0.0.0 \
   --authrpc.port=8551 \
   --authrpc.vhosts=* \
   --authrpc.jwtsecret=/home/chef/Ethereum/jwt.hex \
   --externalcl \
+#  --downloader.verify=true
   --private.api.addr=127.0.0.1:9090 \
-  --webseed=https://snapshots.erigon.io/sepolia/
+#  --webseed=https://snapshots.erigon.io/sepolia/

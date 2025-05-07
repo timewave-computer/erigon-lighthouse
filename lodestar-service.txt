@@ -1,0 +1,24 @@
+[Unit]
+Description=Lodestar Ethereum Beacon Node
+After=network.target
+
+[Service]
+User=chef
+Group=chef
+WorkingDirectory=/home/chef/Ethereum/lodestar
+ExecStart=/usr/bin/node ./packages/cli/bin/lodestar.js beacon \
+  --network=mainnet \
+  --dataDir=/home/chef/Ethereum/data/lodestar \
+  --execution.urls=http://localhost:8551 \
+  --jwtSecret=/home/chef/Ethereum/jwt.hex \
+  --rest \
+  --rest.address=0.0.0.0 \
+  --rest.port=5052 \
+  --metrics \
+  --metrics.port=8008
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
